@@ -26,7 +26,7 @@ class FoodController extends Controller
             'stock'=>'required|integer'
         ]);
 
-        $food = Food::created($request->all());
+        $food = Food::create($request->all());
         return response()->json([
             'success'=>true,
             'message'=>"Success create food",
