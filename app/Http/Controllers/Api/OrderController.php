@@ -72,4 +72,9 @@ class OrderController extends Controller
             'total_bayar' => $order->total_price
         ]);
     }
+    public function show($id) 
+    {
+    $order = Order::with(['table', 'orderItems.food'])->find($id);
+    return response()->json(['success' => true, 'data' => $order]);
+    }
 }

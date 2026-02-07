@@ -15,6 +15,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::apiResource('food',FoodController::class);
 
     Route::get('/orders', [OrderController::class, 'index']);     
+    Route::get('/orders/{id}', [OrderController::class, 'show']);     
     Route::post('/orders', [OrderController::class, 'store']);   
     Route::patch('/orders/{id}/complete', [OrderController::class, 'completeOrder']); 
 });
