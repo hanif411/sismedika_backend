@@ -27,8 +27,9 @@ class OrderController extends Controller
         try {
             $order = Order::create([
                 'table_id' => $request->table_id,
+                'user_id'     => auth()->id(),
                 'total_price' => 0, 
-                'status' => 'pending'
+                'status' => 'open'
             ]);
             $totalPrice = 0;
 
@@ -40,14 +41,13 @@ class OrderController extends Controller
                     'order_id' => $order->id,
                     'food_id'  => $food->id,
                     'quantity' => $item['quantity'],
-                    'price'    => $food->price
                 ]);
 
                 $totalPrice += $subtotal;
             }
 
             $order->update(['total_price' => $totalPrice]);
-            Table::where('id', $request->table_id)->update(['status' => 'occupied']);
+            Table::where('id', $request->table_id)->update(['status' => 'reserved']);
 
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Order Berhasil!', 'data' => $order], 201);

@@ -17,7 +17,6 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/orders', [OrderController::class, 'index']);     
     Route::post('/orders', [OrderController::class, 'store']);   
     Route::patch('/orders/{id}/complete', [OrderController::class, 'completeOrder']); 
-
 });
 
 Route::get('/user', function (Request $request) {
